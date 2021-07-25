@@ -1,0 +1,2163 @@
+Home Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             BackgroundColor="White"
+             Title="Home Page"
+             x:Class="Apmnpl.HomePage"> 
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Image Source="IMG_20201105_214453.jpg"
+                       Grid.Row="0"
+                       Aspect="AspectFit"
+                       VerticalOptions="Start"/>
+                <StackLayout Orientation="Vertical" Grid.Row="1" VerticalOptions="StartAndExpand">
+                    <Label Text="Muncipal Commision of AndhraPradesh"
+                           FontSize="Large"
+                           TextColor="Black"
+                           HorizontalOptions="CenterAndExpand"/>
+                    <Entry Placeholder="User Name"
+                           Margin="20,10,20,0"
+                           x:Name="entryUserName"
+                           TextChanged="entryUserName_TextChanged"/>
+                    <Entry Placeholder="Password"
+                           Margin="20,10,20,0"
+                           x:Name="entryPassword"
+                           IsPassword="True"
+                           TextChanged="entryPassword_TextChanged"/>
+                    <Button Text="Lets Go"
+                            x:Name="buttonLetsGo"
+                            Clicked="buttonLetsGo_Clicked"
+                            IsEnabled="False"
+                            BackgroundColor="Accent"
+                            Margin="50,10,50,0"
+                            CornerRadius="25"/>
+                    <StackLayout VerticalOptions="EndAndExpand">
+                        <Button Text="Register"
+                                x:Name="buttonRegister"
+                                Clicked="buttonRegister_Clicked"
+                                BackgroundColor="Accent"
+                                CornerRadius="25"
+                                Margin="70,60,70,0"/>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class HomePage : ContentPage
+    {
+        public HomePage()
+        {
+            InitializeComponent();
+            //NavigationPage.SetHasNavigationBar(this, false);
+        }
+
+        private async void buttonLetsGo_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MainPage());
+        }
+
+        private void entryUserName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            LetsGo();
+        }
+
+        private void entryPassword_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            LetsGo();
+        }
+        private void LetsGo()
+        {
+            if(!string.IsNullOrEmpty(entryUserName.Text) && !string.IsNullOrEmpty(entryPassword.Text))
+            {
+                buttonLetsGo.IsEnabled = true;
+            }
+            else
+            {
+                buttonLetsGo.IsEnabled = false;
+            }
+        }
+
+        private async void buttonRegister_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NewAccountPage());
+        }
+    }
+}
+
+Registration Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="Create an Account"
+             x:Class="Apmnpl.NewAccountPage">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Margin="20,10,0,0">
+            <StackLayout Orientation="Horizontal">
+                <Entry Placeholder="First Name"
+                       x:Name="entryFirstName"
+                       TextChanged="entryFirstName_TextChanged"
+                       HorizontalOptions="FillAndExpand"/>
+                <Entry Placeholder="Last Name"
+                       x:Name="entryLastName"
+                       TextChanged="entryLastName_TextChanged"
+                       HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <Entry Placeholder="Enter Aadhar Number"
+                   Margin="0,0,50,0"
+                   x:Name="entryEnterAadharNumber"
+                   TextChanged="entryEnterAadharNumber_TextChanged"/>
+            <Entry Placeholder="Enter Email"
+                   Margin="0,0,50,0"
+                   x:Name="entryEnterEmail"
+                   TextChanged="entryEnterEmail_TextChanged"/>
+            <Entry Placeholder="Create User Name"
+                   Margin="0,0,50,0"
+                   x:Name="entryCreateUserName"
+                   TextChanged="entryCreateUserName_TextChanged"/>
+            <Entry Placeholder="Create Password"
+                   Margin="0,0,50,0"
+                   x:Name="entryCreatePassword"
+                   TextChanged="entryCreatePassword_TextChanged"/>
+            <Entry Placeholder="Confirm Password"
+                   Margin="0,0,50,0"
+                   x:Name="entryConfirmPassword"
+                   TextChanged="entryConfirmPassword_TextChanged"/>
+            <Entry Placeholder="Mobile Number"
+                   Margin="0,0,50,0"
+                   x:Name="entryMobileNumber"
+                   TextChanged="entryMobileNumber_TextChanged"/>
+            <Button Text="Create Account"
+                    x:Name="buttontCreateAccount"
+                    Clicked="buttontCreateAccount_Clicked"
+                    IsEnabled="False"
+                    Margin="20,20,30,0"
+                    CornerRadius="25"
+                    BackgroundColor="Accent"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class NewAccountPage : ContentPage
+    {
+        public NewAccountPage()
+        {
+            InitializeComponent();
+        }
+
+        private async void buttontCreateAccount_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MainPage());
+        }
+        private void entryFirstName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CreateAnAccount();
+        }
+
+        private void entryLastName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CreateAnAccount();
+        }
+
+        private void entryEnterAadharNumber_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CreateAnAccount();
+        }
+
+        private void entryEnterEmail_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CreateAnAccount();
+        }
+
+        private void entryCreateUserName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CreateAnAccount();
+        }
+
+        private void entryCreatePassword_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CreateAnAccount();
+        }
+
+        private void entryConfirmPassword_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CreateAnAccount();
+        }
+
+        private void entryMobileNumber_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CreateAnAccount();
+        }
+        private void CreateAnAccount()
+        {
+            if(!string.IsNullOrEmpty(entryFirstName.Text) && !string.IsNullOrEmpty(entryLastName.Text) && !string.IsNullOrEmpty(entryEnterAadharNumber.Text) && !string.IsNullOrEmpty(entryEnterEmail.Text) && !string.IsNullOrEmpty(entryCreateUserName.Text) && !string.IsNullOrEmpty(entryCreatePassword.Text) && !string.IsNullOrEmpty(entryConfirmPassword.Text) && !string.IsNullOrEmpty(entryMobileNumber.Text))
+            {
+                buttontCreateAccount.IsEnabled = true;
+            }
+            else
+            {
+                buttontCreateAccount.IsEnabled = false;
+            }
+        }
+    }
+}
+
+
+
+Main Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Main Page"
+             Visual="Material"
+             x:Class="Apmnpl.MainPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Profile"
+                     x:Name="toolbarItemProfile"
+                     Clicked="toolbarItemProfile_Clicked"
+                     Order="Secondary"
+                     Priority="0"/>
+        <ToolbarItem Text="Services"
+                     x:Name="toolbarItemServices"
+                     Clicked="toolbarItemServices_Clicked"
+                     Order="Secondary"
+                     Priority="1"/>
+        <ToolbarItem Text="Feedback"
+                     x:Name="toolbarFeedback"
+                     Clicked="toolbarFeedback_Clicked"
+                     Order="Secondary"
+                     Priority="2"/>
+        <ToolbarItem Text="Settings"
+                     x:Name="toolbarSettings"
+                     Clicked="toolbarSettings_Clicked"
+                     Order="Secondary"
+                     Priority="3"/>
+        <ToolbarItem Text="24*7 Help"
+                     x:Name="toolbarHelp"
+                     Clicked="toolbarHelp_Clicked"
+                     Order="Secondary"
+                     Priority="4"/>
+        <ToolbarItem Text="History"
+                     x:Name="toolbarHistory"
+                     Clicked="toolbarHistory_Clicked"
+                     Order="Secondary"
+                     Priority="5"/>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout Orientation="Vertical">
+        <StackLayout>
+            <Button Text="Aadhar Payments"
+                x:Name="buttonAadharPayments"
+                Clicked="buttonAadharPayments_Clicked"
+                BackgroundColor="Accent"
+                CornerRadius="25"
+                Margin="40,10,40,0"
+                HorizontalOptions="CenterAndExpand"/>
+            <StackLayout x:Name="EnterAadharNumber" IsVisible="false">
+                <Entry Placeholder="Enter Aadhar Number"
+                       x:Name="entryEnterAadharNumber"
+                       TextChanged="entryEnterAadharNumber_TextChanged"
+                       Margin="10,0,0,0"/>
+                <Button Text="Submit"
+                        x:Name="buttonSubmitOfAadhar"
+                        Clicked="buttonSubmitOfAadhar_Clicked"
+                        IsEnabled="False"
+                        BackgroundColor="Accent"
+                        TextColor="White"
+                        CornerRadius="25"
+                        Margin="110,0,110,0"/>
+            </StackLayout>
+            <Label Text="Or"
+               FontSize="Large"
+               TextColor="red"
+               HorizontalOptions="CenterAndExpand"/>
+            <Button Text="Manual Payments"
+                x:Name="buttonManualPayments"
+                Clicked="buttonManualPayments_Clicked"
+                BackgroundColor="Accent"
+                CornerRadius="25"
+                Margin="40,10,40,0"
+                HorizontalOptions="CenterAndExpand"/>
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
+
+namespace Apmnpl
+{
+    public partial class MainPage : ContentPage
+    {
+        public MainPage()
+        {
+            InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this,true);
+        }
+
+        private async void buttonAadharPayments_Clicked(object sender, EventArgs e)
+        {
+            if(EnterAadharNumber.IsVisible)
+            {
+                EnterAadharNumber.IsVisible = false;
+            }
+            else
+            {
+                EnterAadharNumber.IsVisible = true;
+            }
+        }
+
+        private async void buttonManualPayments_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new BillTypesManual());
+        }
+
+        private async void toolbarItemProfile_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ProfilePage());
+        }
+
+        private async void toolbarItemServices_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Services());
+        }
+
+        private async void toolbarFeedback_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Feedback());
+        }
+
+        private async void toolbarSettings_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SettingsPage());
+        }
+
+        private async void toolbarHelp_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new HelpPage());
+        }
+
+        private async void toolbarHistory_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new HistoryPage());
+        }
+
+        private async void buttonSubmitOfAadhar_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new BillTypes());
+        }
+
+        private void entryEnterAadharNumber_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(!string.IsNullOrEmpty(entryEnterAadharNumber.Text))
+            {
+                buttonSubmitOfAadhar.IsEnabled = true;
+            }
+            else
+            {
+                buttonSubmitOfAadhar.IsEnabled = false;
+            }
+        }
+    }
+}
+Aadhar Bill Types Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Bill Payments Using Aadhar Number"
+             x:Class="Apmnpl.BillTypes">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <Button Text="Current Bill"
+                    x:Name="buttonCurrentBill"
+                    Clicked="buttonCurrentBill_Clicked"/>
+            <Button Text="Electricity Bill"
+                    x:Name="buttonElectricityBill"
+                    Clicked="buttonElectricityBill_Clicked"/>
+            <Button Text="Water Bill"
+                    x:Name="buttonWaterBill"
+                    Clicked="buttonWaterBill_Clicked"/>
+            <Button Text="Land Tax"
+                    x:Name="buttonLandTax"
+                    Clicked="buttonLandTax_Clicked"/>
+            <Button Text="Road Tax"
+                    x:Name="buttonRoadTax"
+                    Clicked="buttonRoadTax_Clicked"/>
+            <Button Text="Bike Insurance"
+                    x:Name="buttonBikeInsurance"
+                    Clicked="buttonBikeInsurance_Clicked"/>
+            <Button Text="Life Insurance"
+                    x:Name="buttonLifeInsurance"
+                    Clicked="buttonLifeInsurance_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class BillTypes : ContentPage
+    {
+        public BillTypes()
+        {
+            InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, true);
+        }
+
+        private void buttonCurrentBill_Clicked(object sender, EventArgs e)
+        {
+            BillPayments();
+        }
+
+        private void buttonElectricityBill_Clicked(object sender, EventArgs e)
+        {
+            BillPayments();
+        }
+
+        private void buttonWaterBill_Clicked(object sender, EventArgs e)
+        {
+            BillPayments();
+        }
+
+        private void buttonLandTax_Clicked(object sender, EventArgs e)
+        {
+            BillPayments();
+        }
+
+        private void buttonRoadTax_Clicked(object sender, EventArgs e)
+        {
+            BillPayments();
+        }
+        private async void BillPayments()
+        {
+            await Navigation.PushAsync(new DuePage());
+        }
+
+        private void buttonBikeInsurance_Clicked(object sender, EventArgs e)
+        {
+            BillPayments();
+        }
+
+        private void buttonLifeInsurance_Clicked(object sender, EventArgs e)
+        {
+            BillPayments();
+        }
+    }
+}
+Manual Bill Types Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Manual Bill Payments"
+             x:Class="Apmnpl.BillTypesManual">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <Button Text="Current Bill"
+                    x:Name="buttonCurrentBill"
+                    Clicked="buttonCurrentBill_Clicked"/>
+            <Button Text="Electricity Bill"
+                    x:Name="buttonElectricityBill"
+                    Clicked="buttonElectricityBill_Clicked"/>
+            <Button Text="Water Bill"
+                    x:Name="buttonWaterBill"
+                    Clicked="buttonWaterBill_Clicked"/>
+            <Button Text="Land Tax"
+                    x:Name="buttonLandTax"
+                    Clicked="buttonLandTax_Clicked"/>
+            <Button Text="Road Tax"
+                    x:Name="buttonRoadTax"
+                    Clicked="buttonRoadTax_Clicked"/>
+            <Button Text="Bike Insurance"
+                    x:Name="buttonBikeInsurance"
+                    Clicked="buttonBikeInsurance_Clicked"/>
+            <Button Text="Life Insurance"
+                    x:Name="buttonLifeInsurance"
+                    Clicked="buttonLifeInsurance_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class BillTypesManual : ContentPage
+    {
+        public BillTypesManual()
+        {
+            InitializeComponent();
+        }
+        private void buttonCurrentBill_Clicked(object sender, EventArgs e)
+        {
+            BillPaymentsManual();
+        }
+
+        private void buttonElectricityBill_Clicked(object sender, EventArgs e)
+        {
+            BillPaymentsManual();
+        }
+
+        private void buttonWaterBill_Clicked(object sender, EventArgs e)
+        {
+            BillPaymentsManual();
+        }
+
+        private void buttonLandTax_Clicked(object sender, EventArgs e)
+        {
+            BillPaymentsManual();
+        }
+
+        private void buttonRoadTax_Clicked(object sender, EventArgs e)
+        {
+            BillPaymentsManual();
+        }
+        private async void BillPaymentsManual()
+        {
+            await Navigation.PushAsync(new ServiceNum());
+        }
+
+        private void buttonBikeInsurance_Clicked(object sender, EventArgs e)
+        {
+            BillPaymentsManual();
+        }
+
+        private void buttonLifeInsurance_Clicked(object sender, EventArgs e)
+        {
+            BillPaymentsManual();
+        }
+    }
+
+}
+Service Number Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="Bill Details"
+             x:Class="Apmnpl.ServiceNum">
+    <ContentPage.Content>
+        <StackLayout Orientation="Horizontal">
+            <Entry Placeholder="Service Number"
+                   HorizontalOptions="FillAndExpand"
+                   x:Name="entryServiceNumber"
+                   TextChanged="entryServiceNumber_TextChanged"
+                   Margin="30,10,10,0"
+                   FontSize="Large"/>
+            <Button Text="Submit"
+                    x:Name="buttonSubmit"
+                    Clicked="buttonSubmit_Clicked"
+                    IsEnabled="False"
+                    HorizontalOptions="Start"
+                    Margin="0,10,0,685"
+                    BackgroundColor="Accent"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ServiceNum : ContentPage
+    {
+        public ServiceNum()
+        {
+            InitializeComponent();
+        }
+
+        private async void buttonSubmit_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new DuePage());
+        }
+
+        private void entryServiceNumber_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(!string.IsNullOrEmpty(entryServiceNumber.Text))
+            {
+                buttonSubmit.IsEnabled = true;
+            }
+            else
+            {
+                buttonSubmit.IsEnabled = false;
+            }
+        }
+    }
+}
+Due Details Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="Due Details"
+             x:Class="Apmnpl.DuePage">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <StackLayout Orientation="Horizontal">
+                <Entry Placeholder="Due Month"
+                       x:Name="entryDueMonth"
+                       TextChanged="entryDueMonth_TextChanged"
+                       FontSize="Large"
+                       Margin="10,10,0,0"
+                       HorizontalOptions="FillAndExpand"/>
+                <Entry Placeholder="Due Date"
+                       x:Name="entryDueDate"
+                       TextChanged="entryDueDate_TextChanged"
+                       FontSize="Large"
+                       Margin="10,10,0,0"
+                       HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <Entry Placeholder="Payable Amount"
+                   x:Name="entryPayableAmount"
+                   TextChanged="entryPayableAmount_TextChanged"
+                   FontSize="Large"
+                   Margin="30,0,30,0"/>
+            <Button Text="Pay"
+                    x:Name="buttonPay"
+                    Clicked="buttonPay_Clicked"
+                    BackgroundColor="Accent"
+                    CornerRadius="25"
+                    IsEnabled="False"
+                    Margin="25,0,25,0"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class DuePage : ContentPage
+    {
+        public DuePage()
+        {
+            InitializeComponent();
+        }
+
+        private async void buttonPay_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Payments());
+        }
+
+        private void entryDueMonth_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DueTime();
+        }
+
+        private void entryDueDate_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DueTime();
+        }
+
+        private void entryPayableAmount_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DueTime();
+        }
+        private void DueTime()
+        {
+            if (!string.IsNullOrEmpty(entryDueMonth.Text) && !string.IsNullOrEmpty(entryDueDate.Text) && !string.IsNullOrEmpty(entryPayableAmount.Text))
+            {
+                buttonPay.IsEnabled = true;
+            }
+            else
+            {
+                buttonPay.IsEnabled = false;
+            }
+            
+        }
+    }
+}
+Payment Method Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="Payment Method"
+             x:Class="Apmnpl.Payments">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <Button Text="Credit Card"
+                    x:Name="buttonCreditCard"
+                    BackgroundColor="Transparent"
+                    TextColor="Black"
+                    Clicked="buttonCreditCard_Clicked"/>
+            <Button Text="Debit Card"
+                    x:Name="buttonDebitCard"
+                    BackgroundColor="Transparent"
+                    TextColor="Black"
+                    Clicked="buttonDebitCard_Clicked"/>
+            <Button Text="Net Banking"
+                    x:Name="buttonNetBanking"
+                    BackgroundColor="Transparent"
+                    TextColor="Black"
+                    Clicked="buttonNetBanking_Clicked"/>
+            <StackLayout Orientation="Vertical" x:Name="numberExpCvv" IsVisible="false">
+                <Entry Placeholder="Enter Card Number"
+                       Margin="30,0,20,0"/>
+                <StackLayout Orientation="Horizontal" Margin="30,0,20,0">
+                    <Entry Placeholder="Exp Date"
+                           HorizontalOptions="FillAndExpand"/>
+                    <Entry Placeholder="CVV"
+                           HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <Entry Placeholder="Name on Card"
+                       Margin="30,0,20,0"/>
+                <Button Text="Submit"
+                        Margin="30,0,20,0"
+                        CornerRadius="25"
+                        BackgroundColor="Accent"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+
+
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class Payments : ContentPage
+    {
+        public Payments()
+        {
+            InitializeComponent();
+        }
+
+        private void buttonCreditCard_Clicked(object sender, EventArgs e)
+        {
+            CardDetails();
+        }
+
+        private void buttonDebitCard_Clicked(object sender, EventArgs e)
+        {
+            CardDetails();
+        }
+
+        private void buttonNetBanking_Clicked(object sender, EventArgs e)
+        {
+            CardDetails();
+        }
+        private async  void CardDetails()
+        {
+            await Navigation.PushAsync(new Card());
+        }
+    }
+}
+Card Details Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="Card Details"
+             x:Class="Apmnpl.Card">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <Entry Placeholder="Card Number"
+                   Margin="30,10,20,0"
+                   x:Name="entryCardNumber"
+                   TextChanged="entryCardNumber_TextChanged"
+                   HorizontalOptions="FillAndExpand"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="30,0,20,0">
+                <Entry Placeholder="Exp Date"
+                       x:Name="entryExpDate"
+                       HorizontalOptions="FillAndExpand"
+                       TextChanged="entryExpDate_TextChanged"/>
+                <Entry Placeholder="CVV"
+                       x:Name="entryCvv"
+                       HorizontalOptions="FillAndExpand"
+                       TextChanged="entryCvv_TextChanged"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="30,10,0,0">
+                <CheckBox/>
+                <Label Text="save for further Transactions"
+                       VerticalOptions="CenterAndExpand"
+                       FontSize="Medium"/>
+            </StackLayout>
+            <Button Text="Submit"
+                    BackgroundColor="Accent"
+                    x:Name="buttonCardSubmit"
+                    Clicked="buttonCardSubmit_Clicked"
+                    CornerRadius="25"
+                    IsEnabled="False"
+                    Margin="30,0,30,0"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class Card : ContentPage
+    {
+        public Card()
+        {
+            InitializeComponent();
+        }
+
+        private async void buttonCardSubmit_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new OtpPage());
+        }
+
+        private void entryCardNumber_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CardDetails();
+        }
+
+        private void entryExpDate_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CardDetails();
+        }
+
+        private void entryCvv_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CardDetails();
+        }
+        private void CardDetails()
+        {
+            if(!string.IsNullOrEmpty(entryCardNumber.Text) &&     !string.IsNullOrEmpty(entryExpDate.Text) && !string.IsNullOrEmpty(entryCvv.Text))
+            {
+                buttonCardSubmit.IsEnabled = true;
+            }
+            else
+            {
+                buttonCardSubmit.IsEnabled = false;
+            }
+        }
+    }
+}
+OTP Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="OTP Section"
+             x:Class="Apmnpl.OtpPage">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+                <Label Text="Bank Name : Andhra Bank"
+                       FontSize="Large"
+                       TextColor="Black"/>
+                <Label Text="Account Number : ************05"
+                       FontSize="Large"
+                       TextColor="Black"/>
+                <Label Text="Transaction Id : ANDB075420B"
+                       FontSize="Large"
+                       TextColor="Black"/>
+            </StackLayout>
+            <Entry Placeholder="Enter OTP"
+                   x:Name="entryEnterOtp"
+                   TextChanged="entryEnterOtp_TextChanged"
+                   Margin="50,10,30,0"/>
+            <Button Text="Submit"
+                    x:Name="buttonSubmitOtp"
+                    Clicked="buttonSubmitOtp_Clicked"
+                    BackgroundColor="Accent"
+                    IsEnabled="False"
+                    CornerRadius="25"
+                    Margin="30,0,30,0"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class OtpPage : ContentPage
+    {
+        public OtpPage()
+        {
+            InitializeComponent();
+        }
+
+        private async void buttonSubmitOtp_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SuccessPage());
+        }
+
+        private void entryEnterOtp_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(!string.IsNullOrEmpty(entryEnterOtp.Text))
+            {
+                buttonSubmitOtp.IsEnabled = true;
+            }
+            else
+            {
+                buttonSubmitOtp.IsEnabled = false;
+            }
+        }
+    }
+}
+Payment Result Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Payment Result"
+             x:Class="Apmnpl.SuccessPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Source="IMG_20201107_211232.jpg"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class SuccessPage : ContentPage
+    {
+        public SuccessPage()
+        {
+            InitializeComponent();
+        }
+    }
+}
+
+
+Profile Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="Green"
+             x:Class="Apmnpl.ProfilePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Name : Akhil Chennupati"
+                   TextColor="White"
+                   FontSize="Large"
+                   Margin="10,10,0,0"/>
+            <Label Text="User Name : Krishaakhil@gmail.com"
+                   TextColor="White"
+                   FontSize="Large"
+                   Margin="10,10,0,0"/>
+            <Label Text="Aadhar Number : 733******266"
+                   TextColor="White"
+                   FontSize="Large"
+                   Margin="10,10,0,0"/>
+            <Label Text="Mobile Number : +91********38"
+                   TextColor="White"
+                   FontSize="Large"
+                   Margin="10,10,0,0"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+
+
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ProfilePage : ContentPage
+    {
+        public ProfilePage()
+        {
+            InitializeComponent();
+        }
+    }
+}
+Services Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="Services"
+             x:Class="Apmnpl.Services">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Text="Water Servise"
+                    x:Name="buttonWaterService"
+                    Clicked="buttonWaterService_Clicked"
+                    TextColor="Black"
+                    BackgroundColor="White"/>
+            <StackLayout x:Name="servicesOfWater" IsVisible="false">
+                <Button Text="Water Connection Service"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+                <Button Text="Pipeline Service"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+            </StackLayout>
+            <Button Text="Gas Servise"
+                    x:Name="buttonGasService"
+                    Clicked="buttonGasService_Clicked"
+                    TextColor="Black"
+                    BackgroundColor="White"/>
+            <StackLayout x:Name="servicesOfGas" IsVisible="false">
+                <Button Text="Bharat Gas"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+                <Button Text="Indian Gas"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+                <Button Text="Hp Gas"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+            </StackLayout>
+            <Button Text="Medical Servise"
+                    x:Name="buttonMedicalService"
+                    Clicked="buttonMedicalService_Clicked"
+                    TextColor="Black"
+                    BackgroundColor="White"/>
+            <StackLayout x:Name="servicesOfMedical" IsVisible="false">
+                <Button Text="Aarogya Sree"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+                <Button Text="Asha"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+                <Button Text="Rbsk"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+                <Button Text="Rksk"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+                <Button Text="Hmis"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+            </StackLayout>
+            <Button Text="Power Servise"
+                    x:Name="buttonPowerService"
+                    Clicked="buttonPowerService_Clicked"
+                    TextColor="Black"
+                    BackgroundColor="White"/>
+            <StackLayout x:Name="servicesOfPower" IsVisible="false">
+                <Button Text="Helper Service"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+                <Button Text="Current Poles"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+                <Button Text="Street Lights"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+                <Button Text="Transformer Services"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+                <Button Text="Sub Stations"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+            </StackLayout>
+            <Button Text="Land Servise"
+                    x:Name="buttonLandService"
+                    Clicked="buttonLandService_Clicked"
+                    TextColor="Black"
+                    BackgroundColor="White"/>
+            <StackLayout x:Name="servicesOfLand" IsVisible="false">
+                <Button Text="Land Registration"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+                <Button Text="Land Valuation"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+            </StackLayout>
+            <Button Text="Transport Servise"
+                    x:Name="buttonTransportService"
+                    Clicked="buttonTransportService_Clicked"
+                    TextColor="Black"
+                    BackgroundColor="White"/>
+            <StackLayout x:Name="servicesOfTransport" IsVisible="false">
+                <Button Text="Public Transport"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+                <Button Text="Private Transport"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+                <Button Text="Bus Transport"
+                        TextColor="White"
+                        BackgroundColor="Black"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class Services : ContentPage
+    {
+        public Services()
+        {
+            InitializeComponent();
+        }
+
+        private void buttonWaterService_Clicked(object sender, EventArgs e)
+        {
+            if(servicesOfWater.IsVisible)
+            {
+                servicesOfWater.IsVisible = false;
+            }
+            else
+            {
+                servicesOfWater.IsVisible = true;
+            }
+        }
+
+        private void buttonGasService_Clicked(object sender, EventArgs e)
+        {
+            if (servicesOfGas.IsVisible)
+            {
+                servicesOfGas.IsVisible = false;
+            }
+            else
+            {
+                servicesOfGas.IsVisible = true;
+            }
+        }
+
+        private void buttonMedicalService_Clicked(object sender, EventArgs e)
+        {
+            if (servicesOfMedical.IsVisible)
+            {
+                servicesOfMedical.IsVisible = false;
+            }
+            else
+            {
+                servicesOfMedical.IsVisible = true;
+            }
+        }
+
+        private void buttonPowerService_Clicked(object sender, EventArgs e)
+        {
+            if (servicesOfPower.IsVisible)
+            {
+                servicesOfPower.IsVisible = false;
+            }
+            else
+            {
+                servicesOfPower.IsVisible = true;
+            }
+        }
+
+        private void buttonLandService_Clicked(object sender, EventArgs e)
+        {
+            if (servicesOfLand.IsVisible)
+            {
+                servicesOfLand.IsVisible = false;
+            }
+            else
+            {
+                servicesOfLand.IsVisible = true;
+            }
+        }
+
+        private void buttonTransportService_Clicked(object sender, EventArgs e)
+        {
+            if (servicesOfTransport.IsVisible)
+            {
+                servicesOfTransport.IsVisible = false;
+            }
+            else
+            {
+                servicesOfTransport.IsVisible = true;
+            }
+        }
+    }
+}
+Feedback Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="Feedback"
+             x:Class="Apmnpl.Feedback">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Give Feedback About Our Service"
+                   TextColor="Black"
+                   FontSize="Large"
+                   HorizontalOptions="CenterAndExpand"/>
+            <Editor HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    x:Name="editorText"
+                    TextChanged="editorText_TextChanged"/>
+            <Button Text="Submit Feedback"
+                    x:Name="buttonSubmitFeedback"
+                    Clicked="buttonSubmitFeedback_Clicked"
+                    BackgroundColor="Accent"
+                    IsEnabled="False"
+                    Margin="30,0,30,0"
+                    CornerRadius="25"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class Feedback : ContentPage
+    {
+        public Feedback()
+        {
+            InitializeComponent();
+        }
+
+        private async void buttonSubmitFeedback_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new FeedbackSuccesPage());
+        }
+
+        private void editorText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(!string.IsNullOrEmpty(editorText.Text))
+            {
+                buttonSubmitFeedback.IsEnabled = true;
+            }
+            else
+            {
+                buttonSubmitFeedback.IsEnabled = false;
+            }
+        }
+    }
+}
+Feedback Success Page;
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="Feedback Result"
+             x:Class="Apmnpl.FeedbackSuccesPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Your Feedback Submitted Scuccesfully"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   FontSize="Large"
+                   TextColor="Black"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class FeedbackSuccesPage : ContentPage
+    {
+        public FeedbackSuccesPage()
+        {
+            InitializeComponent();
+        }
+    }
+}
+Settings Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="Settings"
+             BackgroundColor="White"
+             x:Class="Apmnpl.SettingsPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="4*"/>
+                </Grid.RowDefinitions>
+                <Image Source="IMG_20201109_214318.jpg"
+                       Grid.Row="0"/>
+                <StackLayout Grid.Row="1" Orientation="Vertical">
+                    <Label Text="Edit Profile"
+                           TextColor="Black"
+                           FontSize="Medium"
+                           Margin="10,0,0,10">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                x:Name="labelEditProfile"
+                                Tapped="labelEditProfile_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="Contact Us"
+                           TextColor="Black"
+                           FontSize="Medium"
+                           Margin="10,0,0,10">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                x:Name="labelContactUs"
+                                Tapped="labelContactUs_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="FAQs"
+                           TextColor="Black"
+                           FontSize="Medium"
+                           Margin="10,0,0,10">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                x:Name="labelFAQs"
+                                Tapped="labelFAQs_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="About"
+                           TextColor="Black"
+                           FontSize="Medium"
+                           Margin="10,0,0,10">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                x:Name="labelAbout"
+                                Tapped="labelAbout_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="Privacy Policy"
+                           TextColor="Black"
+                           FontSize="Medium"
+                           Margin="10,0,0,10">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                x:Name="labelPrivacyPolicy"
+                                Tapped="labelPrivacyPolicy_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="Rating"
+                           TextColor="Black"
+                           FontSize="Medium"
+                           Margin="10,0,0,10">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                x:Name="labelRating"
+                                Tapped="labelRating_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="Security Tips"
+                           TextColor="Black"
+                           FontSize="Medium"
+                           Margin="10,0,0,10">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                x:Name="labelSecurityTips"
+                                Tapped="labelSecurityTips_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="Logout"
+                           TextColor="Black"
+                           FontSize="Medium"
+                           Margin="10,0,0,10">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                x:Name="labelLogout"
+                                Tapped="labelLogout_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class SettingsPage : ContentPage
+    {
+        public SettingsPage()
+        {
+            InitializeComponent();
+        }
+
+        private async void labelEditProfile_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new EditProfilePage());
+        }
+
+        private async void labelContactUs_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ContactUsPage());
+        }
+
+        private async void labelFAQs_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new FaqsPage());
+        }
+
+        private async void labelAbout_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AboutPage());
+        }
+
+        private async void labelPrivacyPolicy_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new PrivacyPolicy());
+        }
+
+        private async void labelRating_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new RatingPage());
+        }
+
+        private async void labelSecurityTips_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SecurityTipspage());
+        }
+
+        private async void labelLogout_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new LogoutPage());
+        }
+    }
+}
+Edit Profile Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="Edit Profile"
+             x:Class="Apmnpl.EditProfilePage">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <Entry Placeholder="Edit Name"
+                   x:Name="entryEditName"
+                   TextChanged="entryEditName_TextChanged"
+                   Margin="30,0,10,0"/>
+            <Entry Placeholder="Edit Mobile Number"
+                   x:Name="entryEditMobileNumber"
+                   TextChanged="entryEditMobileNumber_TextChanged"
+                   Margin="30,0,10,0"/>
+            <Entry Placeholder="Edit Email"
+                   x:Name="entryEditEmail"
+                   TextChanged="entryEditEmail_TextChanged"
+                   Margin="30,0,10,0"/>
+            <Entry Placeholder="Current Password"
+                   x:Name="entryCurrentPassword"
+                   TextChanged="entryCurrentPassword_TextChanged"
+                   Margin="30,0,10,0"/>
+            <Entry Placeholder="New Password"
+                   x:Name="entryNewPassword"
+                   TextChanged="entryNewPassword_TextChanged"
+                   Margin="30,0,10,0"/>
+            <Button Text="Submit Changes"
+                    x:Name="buttonSubmitChanges"
+                    Clicked="buttonSubmitChanges_Clicked"
+                    IsEnabled="False"
+                    BackgroundColor="Accent"
+                    CornerRadius="25"
+                    Margin="40,0,40,0"/>
+            <Label Text="Changes Submitted Succesfully"
+                   HorizontalOptions="CenterAndExpand"
+                   x:Name="labelChangesSubmittedSuccesfully"
+                   IsVisible="false"
+                   FontSize="Medium"
+                   TextColor="Green"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class EditProfilePage : ContentPage
+    {
+        public EditProfilePage()
+        {
+            InitializeComponent();
+        }
+
+        private void entryEditName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EditProfile();
+        }
+
+        private void entryEditMobileNumber_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EditProfile();
+        }
+
+        private void entryEditEmail_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EditProfile();
+        }
+
+        private void entryCurrentPassword_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EditProfile();
+        }
+
+        private void entryNewPassword_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EditProfile();
+        }
+
+        private void buttonSubmitChanges_Clicked(object sender, EventArgs e)
+        {
+            if(labelChangesSubmittedSuccesfully.IsVisible)
+            {
+                labelChangesSubmittedSuccesfully.IsVisible = true;
+            }
+            else
+            {
+                labelChangesSubmittedSuccesfully.IsVisible = true;
+            }
+        }
+        private void EditProfile()
+        {
+            if(!string.IsNullOrEmpty(entryEditName.Text) && !string.IsNullOrEmpty(entryEditMobileNumber.Text) && !string.IsNullOrEmpty(entryEditEmail.Text) && !string.IsNullOrEmpty(entryCurrentPassword.Text) && !string.IsNullOrEmpty(entryNewPassword.Text))
+            {
+                buttonSubmitChanges.IsEnabled = true;
+            }
+            else
+            {
+                buttonSubmitChanges.IsEnabled = false;
+            }
+        }
+    }
+}
+Contact Us Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="Contact Us"
+             x:Class="Apmnpl.ContactUsPage">
+    <ContentPage.Content>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Contact Us On Gmail : "
+                   FontSize="Medium"
+                   TextColor="Black"/>
+            <Label Text="krishnaakhil@gmail.com"
+                   FontSize="Medium"
+                   TextColor="Blue">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        x:Name="labelkrishna"
+                        Tapped="labelkrishna_Tapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ContactUsPage : ContentPage
+    {
+        public ContactUsPage()
+        {
+            InitializeComponent();
+        }
+
+        private void labelkrishna_Tapped(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
+FAQ’s Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="FAQs"
+             x:Class="Apmnpl.FaqsPage">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" BackgroundColor="Transparent">
+            <Button Text="Getting Started for Mobile Bill Payments App"
+                    BackgroundColor="White"
+                    TextColor="Black"/>
+            <Button Text="Aadhar Related to Mobile Payments"
+                    BackgroundColor="White"
+                    TextColor="Black"/>
+            <Button Text="Password Related to Mobile Payments"
+                    BackgroundColor="White"
+                    TextColor="Black"/>
+            <Button Text="My Bills for Mobile Bill Payments App"
+                    BackgroundColor="White"
+                    TextColor="Black"/>
+            <Button Text="Biometric for Mobile Bill Payments App"
+                    BackgroundColor="White"
+                    TextColor="Black"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class FaqsPage : ContentPage
+    {
+        public FaqsPage()
+        {
+            InitializeComponent();
+        }
+    }
+}
+About Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="About"
+             x:Class="Apmnpl.AboutPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Version : 5.2.0"
+                   TextColor="Black"
+                   FontSize="Medium"
+                   Margin="10,0,0,0"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class AboutPage : ContentPage
+    {
+        public AboutPage()
+        {
+            InitializeComponent();
+        }
+    }
+}
+Privacy policy Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="Privacy Policy"
+             x:Class="Apmnpl.PrivacyPolicy">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Privacy Policy"
+                   HorizontalOptions="CenterAndExpand"
+                   FontSize="Large"
+                   TextColor="Black"/>
+            <Label Text="The Privacy Policy is a document informing the users about the use, process and disclosure of their personal information collected through a Website or Mobile Application. This document can be used for any type of industries including healthcare, finance, e-commerce, transportation, etc...
+
+This Privacy Policy can be used for either Website or Mobile Application. It is mandatory for every Website/Application in India who collects and process personal information to have a Privacy Policy. Any Website/App that gathers any data about its users, even if it is simply through tracking their location, is required to have a Privacy Policy.
+
+It is mandatory under the IT Act, 2000 to notify and get the consent of users before collecting and processing their information. Thus the Privacy Policy has to be visible and understandable to the users.
+
+The Sensitive Personal Data in India constitutes the following categories of the data: passwords, financial data, health data, official identifier, sex life, sexual orientation, biometric data, genetic data, transgender status, intersex status, caste or tribe, religious belief, political affiliation or any other category of data specified by the concerned authority.
+
+
+How to use this document
+
+This document is drafted as per the Indian laws and rules. It should be noted that this document only includes a Privacy Policy. Other related documents like Website Terms and Conditions and Cookies Policy need to be drafted separately. Terms and Conditions and Privacy Policy are separate documents.
+
+Terms and Conditions define how the user can use the Website/Application and what are the obligations of the Users and the owners of the Website/Application. Terms and Conditions also include details about how the business works, delivery and return policy, the geographical location of the business, age restrictions, dispute resolution and so on. On the other hand, Privacy Policy is a detailed document explaining how the owner of the Website/Application deals with the personal information of the users such as the details about the uses of information, how the information is collected, what information is collected, retention and deletion of information, age restrictions, security methods adopted, etc..."
+                   TextColor="Black"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class PrivacyPolicy : ContentPage
+    {
+        public PrivacyPolicy()
+        {
+            InitializeComponent();
+        }
+    }
+}
+Rating Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="Rating"
+             x:Class="Apmnpl.RatingPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Rate us"
+                   TextColor="Gold"
+                   HorizontalOptions="CenterAndExpand"
+                   FontSize="Large"/>
+            <Image Source="IMG_20201110_140507.jpg"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class RatingPage : ContentPage
+    {
+        public RatingPage()
+        {
+            InitializeComponent();
+        }
+    }
+}
+Security Tips Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="Security Tips"
+             x:Class="Apmnpl.SecurityTipspage">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <Label Text="Do not use a public computer. ..."
+                   TextColor="Black"
+                   FontSize="Medium"
+                   Margin="10,0,0,0"/>
+            <Label Text="Do not use a public Wi-Fi network. ..."
+                   TextColor="Black"
+                   FontSize="Medium"
+                   Margin="10,0,0,0"/>
+            <Label Text="Keep your browser up to date. ..."
+                   TextColor="Black"
+                   FontSize="Medium"
+                   Margin="10,0,0,0"/>
+            <Label Text="Use anti-virus/anti-malware. ..."
+
+                   FontSize="Medium"
+                   Margin="10,0,0,0"/>
+            <Label Text="Passwords, passwords, passwords! ..."
+                   TextColor="Black"
+                   FontSize="Medium"
+                   Margin="10,0,0,0"/>
+            <Label Text="Don't click on links."
+                   TextColor="Black"
+                   FontSize="Medium"
+                   Margin="10,0,0,0"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class SecurityTipspage : ContentPage
+    {
+        public SecurityTipspage()
+        {
+            InitializeComponent();
+        }
+    }
+}
+
+Logout Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="Logout"
+             x:Class="Apmnpl.LogoutPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Logged Out Succesfully"
+                   TextColor="Black"
+                   FontSize="Large"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class LogoutPage : ContentPage
+    {
+        public LogoutPage()
+        {
+            InitializeComponent();
+        }
+    }
+}
+24*7 Help Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="Help"
+             x:Class="Apmnpl.HelpPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Placeholder="Please enter your Question"
+                   x:Name="entryPleaseAskQuestion"
+                   TextChanged="entryPleaseAskQuestion_TextChanged"
+                   HorizontalOptions="FillAndExpand"
+                   Margin="10,0,0,0"/>
+            <Button Text="Submit Question"
+                    x:Name="buttonSubmitQuestion"
+                    Clicked="buttonSubmitQuestion_Clicked"
+                    IsEnabled="false"
+                    BackgroundColor="Accent"
+                    TextColor="White"
+                    CornerRadius="25"
+                    Margin="50,0,50,0"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class HelpPage : ContentPage
+    {
+        public HelpPage()
+        {
+            InitializeComponent();
+        }
+
+        private async void buttonSubmitQuestion_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new HelpStatusPage());
+        }
+
+        private void entryPleaseAskQuestion_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(!string.IsNullOrEmpty(entryPleaseAskQuestion.Text))
+            {
+                buttonSubmitQuestion.IsEnabled = true;
+            }
+            else
+            {
+                buttonSubmitQuestion.IsEnabled = false;
+            }
+        }
+    }
+}
+Help Status Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="Help Status Page"
+             x:Class="Apmnpl.HelpStatusPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Question Submitted Succesfully"
+                   TextColor="Black"
+                   FontSize="Large"
+                   HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Our Team Checking Your Issue they will Contact You Soon"
+                   TextColor="Green"
+                   Margin="20,0,20,0"
+                   FontSize="Large"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class HelpStatusPage : ContentPage
+    {
+        public HelpStatusPage()
+        {
+            InitializeComponent();
+        }
+    }
+}
+History Page:
+Front End:
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Visual="Material"
+             Title="History"
+             x:Class="Apmnpl.HistoryPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="There No Recent Transaction History"
+                   TextColor="Black"
+                   FontSize="Large"
+                   HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+Back End:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Apmnpl
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class HistoryPage : ContentPage
+    {
+        public HistoryPage()
+        {
+            InitializeComponent();
+        }
+    }
+}
+
+
+
+
+
+
